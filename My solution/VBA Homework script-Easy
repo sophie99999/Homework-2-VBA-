@@ -1,0 +1,35 @@
+Sub Homework_Easy()
+numofRows = Cells(Rows.Count, "A").End(xlUp).Row
+Dim Total_volume As Double
+Total_volume = Cells(2, 7).Value
+Display_row = 2
+Cells(1, 9).Value = "Ticker"
+Cells(1, 10).Value = "Total Volume"
+
+
+For i = 2 To numofRows
+
+'If the next cell value equals to the current cell value,
+'then add the next cell volume number to the current total volme number
+If Cells(i + 1, 1).Value = Cells(i, 1).Value Then
+Total_volume = Total_volume + Cells(i + 1, 7).Value
+
+'if the next cell value does not equal to the current cell value,
+'then return the total volume number to cell(2,10) and current cells ticker symbol to cells(2,9)
+ElseIf Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+Cells(Display_row, 10).Value = Total_volume
+Cells(Display_row, 9).Value = Cells(i, 1).Value
+
+'Reset Total volume number
+Total_volume = Cells(i + 1, 7).Value
+Display_row = Display_row + 1
+
+
+End If
+
+Next i
+
+
+
+End Sub
+
